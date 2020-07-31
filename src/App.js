@@ -1,5 +1,5 @@
 import React from 'react';
-import {Home, SignIn, SignUp} from './views'
+import { Home, SignIn, SignUp, Dashboard, NewCalendar } from './views'
 import './App.css';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
@@ -21,6 +21,12 @@ const AppRouter = () => {
           </Route>
           <Route path="/sign-up">
             <SignUp />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route path="/calendar/new">
+            <NewCalendar />
           </Route>
         </Switch>
     </Router>

@@ -1,7 +1,6 @@
-import HomeView from './home'
-import SignInView from './sign-in'
-import SignUpView from './sign-up'
+export { default as Home } from './home'
+export { default as SignIn } from './sign-in'
+export { default as SignUp } from './sign-up'
+export { default as Dashboard } from './dashboard'
+export { NewCalendar } from './calendar'
 
-export const Home = HomeView
-export const SignIn = SignInView
-export const SignUp = SignUpView

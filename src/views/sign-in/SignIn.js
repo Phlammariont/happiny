@@ -5,7 +5,7 @@ import {SecondActionButton} from '../../components'
 const SignUpButton = () => {
   return (
     <Link to='/sign-up'>
-      <SecondActionButton onClick={() => console.log('sign in')}>
+      <SecondActionButton>
         Sign Up
       </SecondActionButton>
     </Link>

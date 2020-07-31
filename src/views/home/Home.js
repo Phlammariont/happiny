@@ -20,7 +20,7 @@ const Logo = styled.img`
 const SignInButton = () => {
   return (
     <Link to='/sign-in'>
-      <MainActionButton onClick={() => console.log('sign in')}>
+      <MainActionButton>
         Iniciar Sesión
       </MainActionButton>
     </Link>
@@ -30,7 +30,7 @@ const SignInButton = () => {
 const SignUpButton = () => {
   return (
     <Link to='/sign-up'>
-      <SecondActionButton onClick={() => console.log('sign up')}>
+      <SecondActionButton>
         Crear Cuenta
       </SecondActionButton>
     </Link>

@@ -1,16 +1,31 @@
-import React from 'react'
-import { ViewContainer, ActionsContainer, MainActionButton, LogoContainer, Input } from '../../components'
+import React, { useState } from 'react'
+import {
+  ActionsContainer,
+  Input,
+  LogoContainer,
+  MainActionButton,
+  MainFormContainer,
+  ViewContainer,
+} from '../../components'
 import { Link } from 'react-router-dom'
 import logo from '../../images/nurse-transparente.png'
 import styled from 'styled-components'
+import { createUser } from '../../service/auth'
+import { useHistory } from 'react-router-dom'
 
-const SignUpButton = () => {
+const PASSWORD_ERROR = 'Las contraseñas deben ser iguales'
+
+const SignUpButton = ({ onClick }) => {
+  const history = useHistory()
+  const signUp = async () => {
+    await onClick()
+    history.push('/dashboard')
+  }
+
   return (
-    <Link to='/sign-in'>
-      <MainActionButton onClick={() => console.log('sign in')}>
-        Registrarme
-      </MainActionButton>
-    </Link>
+    <MainActionButton onClick={signUp}>
+      Registrarme
+    </MainActionButton>
   )
 }
 
@@ -34,36 +49,49 @@ const Logo = styled.img`
 `
 
 const SignUpView = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordRepeat, setPasswordRepeat] = useState('')
+  const [error, setError] = useState('')
+
+
+  const signUp = async () => {
+    if (password !== passwordRepeat) setError(PASSWORD_ERROR)
+    await createUser({ email, password })
+  }
+
   return (
     <ViewContainer>
-      <LogoContainer >
+      <LogoContainer>
         <Logo src={logo} alt="Nurse Planner"/>
       </LogoContainer>
-      <SignUpForm />
+      <SignUpForm
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        passwordRepeat={passwordRepeat}
+        setPasswordRepeat={setPasswordRepeat}
+        error={error}/>
       <ActionsContainer>
-        <SignUpButton />
+        <SignUpButton onClick={signUp}/>
         <LogInText/>
       </ActionsContainer>
     </ViewContainer>
   )
 }
 
-const SignUpFormContainer = styled.div`
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-`
-
-const SignUpForm = () => {
+const SignUpForm = ({ email, password, passwordRepeat, setEmail, setPassword, setPasswordRepeat, error }) => {
   return (
-    <SignUpFormContainer>
+    <MainFormContainer>
       <form>
-        <Input label="E-Mail" />
-        <Input label="Contraseña" type="password" autocomplete="new-password"/>
-        <Input label="Confirma tu Contraseña" type="password" autocomplete="new-password"/>
+        <Input label="E-Mail" autoComplete="username" value={email} onChange={event => setEmail(event.target.value)}/>
+        <Input label="Contraseña" type="password" autoComplete="new-password" value={password}
+               onChange={event => setPassword(event.target.value)} />
+        <Input label="Confirma tu Contraseña" type="password" autoComplete="new-password" error={error}
+               value={passwordRepeat} onChange={event => setPasswordRepeat(event.target.value)} />
       </form>
-    </SignUpFormContainer>
+    </MainFormContainer>
   )
 }
 
