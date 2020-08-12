@@ -2,10 +2,14 @@ import React from 'react';
 import { Home, SignIn, SignUp, Dashboard, NewCalendar } from './views'
 import './App.css';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import appStore from './redux'
 
 function App() {
   return (
-    <AppRouter />
+    <Provider store={appStore}>
+      <AppRouter />
+    </Provider>
   );
 }
 

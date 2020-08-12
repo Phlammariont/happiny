@@ -1,5 +1,3 @@
-import Main from './MainAction'
-import Second from './SecondAction'
-
-export const MainAction = Main
-export const SecondAction = Second
+export { default as MainAction } from './MainAction'
+export { default as SecondAction } from './SecondAction'
+export { default as Fab } from './fab'
