@@ -29,7 +29,7 @@ const ServicesContainer = styled.div`
   background-color: #BBE6E4;
   width: 100%;
   height: 25vh;
-  color: white;
+  color: black;
   text-align: center; 
 `
 
