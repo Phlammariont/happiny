@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 import { ViewContainer, ActionsContainer, Fab } from '../../components'
 import { ReactComponent as Calendar } from '../../components/icons/calendar.svg';
 import { ReactComponent as Team } from '../../components/icons/team.svg';
 import { ReactComponent as Services } from '../../components/icons/cardiovascular.svg';
+import { ROUTES } from '../../constants'
 
 const DashboardCardsContent = (props) => {
   return <div>{props.children}</div>
@@ -86,13 +88,14 @@ const ServicesCard = ({ services }) => {
 
 const NewModelButton = () => {
   const [ isOpen, setIsOpen ] = useState(false)
+  const history = useHistory()
 
   const toggleOpen = () => setIsOpen(!isOpen)
   return (
     <NewModelButtonsContainer>
       {isOpen && <>
         <Fab weight={2} label={'Planeador'}>+</Fab>
-        <Fab weight={2} label={'Equipo'}>+</Fab>
+        <Fab weight={2} label={'Equipo'} onClick={() => history.push(ROUTES.TEAMS.NEW)  }>+</Fab>
         <Fab weight={2} label={'Servicio'}>+</Fab></>
       }
       <Fab onClick={toggleOpen} weight={3}>+</Fab>

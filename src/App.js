@@ -1,9 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
-import { Home, SignIn, SignUp, Dashboard, NewCalendar, Profile } from './views'
+import { Home, SignIn, SignUp, Dashboard, NewCalendar, Profile, NewTeam } from './views'
 import appStore from './redux'
 import './App.css';
+import { ROUTES } from './constants'
 
 function App() {
   return (
@@ -34,6 +35,9 @@ const AppRouter = () => {
           </Route>
           <Route path="/calendar/new">
             <NewCalendar />
+          </Route>
+          <Route path={ROUTES.TEAMS.NEW}>
+            <NewTeam />
           </Route>
         </Switch>
     </Router>
