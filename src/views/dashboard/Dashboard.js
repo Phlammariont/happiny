@@ -1,50 +1,123 @@
-import React from 'react'
-import { ViewContainer, TopBar, ActionsContainer, MainActionButton } from '../../components'
-import { isEmpty } from 'ramda'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { ViewContainer, ActionsContainer, Fab } from '../../components'
+import { ReactComponent as Calendar } from '../../components/icons/calendar.svg';
+import { ReactComponent as Team } from '../../components/icons/team.svg';
+import { ReactComponent as Services } from '../../components/icons/cardiovascular.svg';
 
 const DashboardCardsContent = (props) => {
   return <div>{props.children}</div>
 }
 
-const CalendarsCard = ({calendars}) => {
-  if (isEmpty(calendars)) return <div>No tienes calendarios aún</div>
-  return <div>{calendars.length}</div>
-}
+const PlannersContainer = styled.div`
+  background-color: #084B83;
+  width: 100%;
+  height: 25vh;
+  color: white;
+  text-align: center; 
+`
 
-const TeamsCard = ({ teams }) => {
-  if (isEmpty(teams)) return null
-  return <div>{teams.length}</div>
-}
+const TeamsContainer = styled.div`
+  background-color: #FF66B3;
+  width: 100%;
+  height: 25vh;
+  color: white;
+  text-align: center; 
+`
 
-const ServicesCard = ({ services }) => {
-  if (isEmpty(services)) return null
-  return <div>{services.length}</div>
-}
+const ServicesContainer = styled.div`
+  background-color: #BBE6E4;
+  width: 100%;
+  height: 25vh;
+  color: black;
+  text-align: center; 
+`
 
-const NewCalendarButton = () => {
+const CalendarIcon = styled(Calendar)`
+  width: 30%;
+  margin: 5%;
+  height: auto;
+`
+
+const TeamIcon = styled(Team)`
+  width: 30%;
+  margin: 5%;
+  height: auto;
+`
+
+const ServicesIcon = styled(Services)`
+  width: 30%;
+  margin: 5%;
+  height: auto;
+`
+
+const NewModelButtonsContainer = styled.div`
+  margin: 1rem;
+  align-self: flex-end;
+  display: flex;
+`
+
+const DashboardPlannerCard = ({ planners }) => {
   return (
-    <Link to='/calendar/new'>
-      <MainActionButton>
-        Nuevo Calendario
-      </MainActionButton>
-    </Link>
+    <PlannersContainer>
+      <CalendarIcon /><br/>
+      <span>Planeadores: {planners.length && <span>({planners.length})</span>}</span>
+    </PlannersContainer>
   )
 }
 
-const Dashboard = ({ user, teams, services, calendars }) => {
+const TeamsCard = ({ teams }) => {
   return (
-    <ViewContainer>
-      <TopBar user={user}/>
-      <DashboardCardsContent>
-        <CalendarsCard calendars={calendars} />
-        <TeamsCard teams={teams} />
-        <ServicesCard services={services} />
-      </DashboardCardsContent>
-      <ActionsContainer>
-        <NewCalendarButton />
-      </ActionsContainer>
-    </ViewContainer>
+    <TeamsContainer>
+      <TeamIcon /><br/>
+      <span>Equipos: {teams.length && <span>({teams.length})</span>}</span>
+    </TeamsContainer>
+  )
+}
+
+const ServicesCard = ({ services }) => {
+  return (
+    <ServicesContainer>
+      <ServicesIcon/><br/>
+      <span>Servicios: {services.length && <span>({services.length})</span>}</span>
+    </ServicesContainer>
+  )
+}
+
+const NewModelButton = () => {
+  const [ isOpen, setIsOpen ] = useState(false)
+
+  const toggleOpen = () => setIsOpen(!isOpen)
+  return (
+    <NewModelButtonsContainer>
+      {isOpen && <>
+        <Fab weight={2} label={'Planeador'}>+</Fab>
+        <Fab weight={2} label={'Equipo'}>+</Fab>
+        <Fab weight={2} label={'Servicio'}>+</Fab></>
+      }
+      <Fab onClick={toggleOpen} weight={3}>+</Fab>
+    </NewModelButtonsContainer>
+  )
+}
+
+const Dashboard = ({ teams = [], services = [], planners = [] }) => {
+  return (
+    <>
+      <ViewContainer>
+        <DashboardCardsContent>
+          <DashboardPlannerCard planners={planners} />
+          <ServicesCard services={services} />
+          <TeamsCard teams={teams} />
+        </DashboardCardsContent>
+        <ActionsContainer>
+          <NewModelButton />
+        </ActionsContainer>
+      </ViewContainer>
+      <div>
+        Icons made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+      </div>
+    </>
   )
 }
 
