@@ -1,9 +1,9 @@
 import React from 'react';
-import { Home, SignIn, SignUp, Dashboard, NewCalendar } from './views'
-import './App.css';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Home, SignIn, SignUp, Dashboard, NewCalendar, Profile } from './views'
 import appStore from './redux'
+import './App.css';
 
 function App() {
   return (
@@ -28,6 +28,9 @@ const AppRouter = () => {
           </Route>
           <Route path="/dashboard">
             <Dashboard />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
           <Route path="/calendar/new">
             <NewCalendar />

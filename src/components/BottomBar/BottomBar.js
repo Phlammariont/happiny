@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { Link } from 'react-router-dom'
 export const EXPLORE = "Explora"
 export const CALENDAR = "Calendario"
 
@@ -46,14 +47,19 @@ const Calendar = () => {
 }
 
 const Profile = ({ user }) => {
-  return <BottomBarTab>{user.name || 'Perfil'}</BottomBarTab>
+  return <BottomBarTab to='/profile'>{user.name || 'Perfil'}</BottomBarTab>
 }
 
-const BottomBarTab = ({ children }) => {
+const BottomBarLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`
+
+const BottomBarTab = ({ children, to }) => {
   return (
-    <div>
+    <BottomBarLink to={to}>
       <span>{children}</span>
-    </div>
+    </BottomBarLink>
   )
 }
 
