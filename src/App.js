@@ -5,6 +5,7 @@ import { Home, SignIn, SignUp, Dashboard, NewCalendar, Profile, NewTeam } from '
 import appStore from './redux'
 import './App.css';
 import { ROUTES } from './constants'
+import { DevBar } from './dev-tools'
 
 function App() {
   return (
@@ -40,6 +41,7 @@ const AppRouter = () => {
             <NewTeam />
           </Route>
         </Switch>
+        <DevBar />
     </Router>
   )
 }
