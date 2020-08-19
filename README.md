@@ -1,4 +1,9 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Before developing you can create a file in the project root called 
+`.env.local`
+
+you can add:
+`REACT_APP_AUTO_LOG_IN=true` so you don't need to login in the app to start testing  
+`REACT_APP_AUTO_NAVIGATE=/dashboard` [use you route instead of dashboard] this way you will be in that route automaticaly after load
 
 ## Available Scripts
 
