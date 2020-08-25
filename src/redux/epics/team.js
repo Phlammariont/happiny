@@ -1,6 +1,6 @@
 import { find, propEq, equals } from 'ramda'
 import { combineEpics, ofType } from "redux-observable"
-import { filter, map, mapTo, mergeMap, withLatestFrom } from 'rxjs/operators'
+import { filter, map, mergeMap, withLatestFrom } from 'rxjs/operators'
 import { AppActionCreator, TEAM_ACTIONS, TeamActionCreator } from '../actions'
 import teamService from "../../service/team"
 import { getTeamsCollection } from '../selectors'
@@ -11,6 +11,7 @@ const fetchAll = (action$, state$) =>
     ofType(TEAM_ACTIONS.fetchAll),
     mergeMap(() =>
       concat(
+        of(AppActionCreator.setLoading()),
         teamService.fetchAll().pipe(
           withLatestFrom(state$),
           filter(isMissingTeam),
@@ -21,11 +22,6 @@ const fetchAll = (action$, state$) =>
     )
   )
 
-const loading = action$ => action$.pipe(
-  ofType(TEAM_ACTIONS.fetchAll),
-  mapTo(AppActionCreator.setLoading())
-)
-
 const isMissingTeam = ([team, state]) => {
   const teams = getTeamsCollection(state)
   const teamInStore = find(propEq('id', team.id), teams)
@@ -34,4 +30,4 @@ const isMissingTeam = ([team, state]) => {
 
 const addItemToStore = ([team]) => TeamActionCreator.addItem(team)
 
-export default combineEpics(loading, fetchAll)
+export default combineEpics(fetchAll)
