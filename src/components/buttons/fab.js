@@ -9,19 +9,38 @@ const FabContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 0.25rem
+  margin: 0 0.25rem;
+`
+
+const ListFabContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0.25rem;
+  position: fixed;
+  bottom: 5rem;
+  right: 1rem;
 `
 
 const FabLabel = styled.label`
 `
 
 
-const FabButton = ({label, ...rest}) => {
+const Fab = ({label, ...rest}) => {
   return (
     <FabContainer>
       <FAB id={"btn-" + label} {...rest}/>
       <FabLabel htmlFor={"btn-" + label}>{label}</FabLabel>
     </FabContainer>
+  )
+}
+
+export const ListFab = ({label, ...rest}) => {
+  return (
+    <ListFabContainer>
+      <FAB id={"btn-" + label} {...rest}/>
+      <FabLabel htmlFor={"btn-" + label}>{label}</FabLabel>
+    </ListFabContainer>
   )
 }
 
@@ -37,4 +56,4 @@ const FAB = styled(Button)`
   margin: 0.25rem
 `
 
-export default FabButton
+export default Fab

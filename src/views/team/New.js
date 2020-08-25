@@ -6,31 +6,43 @@ import {
   MainActionButton,
   MainFormContainer,
   ViewContainer,
+  TitleContainer,
+  DangerActionButton,
 } from '../../components'
-import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import { ROUTES } from '../../constants'
 import teamService from '../../service/team'
-
+import { useDispatch } from 'react-redux'
+import { TeamActionCreator } from '../../redux/actions'
+import { isNil } from 'ramda'
 
 const nameHasError = (errors) => errors.name
 const getEmailError = (errors) => errors.name?.errors
 
-const TitleContainer = styled.div`
-  height: 25vh;
-`
+const NewTeam = ({ team }) => {
+  const dispatch = useDispatch()
+  const [name, setName] = useState(team.name)
+  const [users, setUsers] = useState(team.users)
+  const [errors] = useState({})
 
-const NewTeam = () => {
-  const [name, setName] = useState("")
-  const [users, setUsers] = useState([])
-  const [errors, setErrors] = useState({})
+  const changeName = evt => setName(evt.target.value)
 
-  const handleChange = fieldName => evt => setName(evt.target.value)
+  const save = () => {
+    if (isNil(team.id)) return teamService.save({
+      name,
+      users,
+    })
 
-  const save = () => teamService.save({
-    name,
-    users,
-  })
+    return teamService.update(team.id, {
+      name,
+      users,
+    })
+  }
+
+  const deleteTeam = async () => {
+    await teamService.remove(team.id)
+    dispatch(TeamActionCreator.remove(team.id))
+  }
 
   return (
     <ViewContainer>
@@ -48,7 +60,7 @@ const NewTeam = () => {
             label="Nombre"
             autoComplete="service-name"
             value={name}
-            onChange={handleChange("name")}
+            onChange={changeName}
             error={nameHasError(errors)}
             errorMessage={getEmailError(errors)}
           />
@@ -64,6 +76,7 @@ const NewTeam = () => {
       </MainFormContainer>
       <ActionsContainer>
         <SaveButton onClick={save}/>
+        { team?.id && <DeleteButton onClick={deleteTeam} /> }
       </ActionsContainer>
     </ViewContainer>
   )
@@ -86,6 +99,23 @@ const SaveButton = ({ onClick, setErrors }) => {
     <MainActionButton onClick={save}>
       Guardar
     </MainActionButton>
+  )
+}
+
+const DeleteButton = ({ onClick }) => {
+  const history = useHistory()
+  const deleteTeam = async () => {
+    try {
+      await onClick()
+    } catch (error) {
+      console.log(error)
+    }
+    history.push(ROUTES.TEAMS.LIST)
+  }
+  return (
+    <DangerActionButton onClick={deleteTeam}>
+      Eliminar Equipo
+    </DangerActionButton>
   )
 }
 

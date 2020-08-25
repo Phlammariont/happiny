@@ -5,6 +5,6 @@ const ViewContainer = styled.div`
   width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: ${({top}) => top ? 'flex-start' : 'space-between'};
 `
 export default ViewContainer
