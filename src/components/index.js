@@ -2,12 +2,13 @@ export { Input, InputNumber, ListInput } from './inputs'
 export {
   MainAction as MainActionButton,
   SecondAction as SecondActionButton,
-  DangerAction as DangerActionButton,
+  WarningAction as WarningActionButton,
   Fab,
   ListFab
 } from './buttons'
 export {
   ViewContainer,
+  ViewContainerTop,
   ActionsContainer,
   LogoContainer,
   MainFormContainer,

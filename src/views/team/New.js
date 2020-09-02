@@ -5,9 +5,9 @@ import {
   ListInput,
   MainActionButton,
   MainFormContainer,
-  ViewContainer,
   TitleContainer,
-  DangerActionButton,
+  ViewContainer,
+  WarningActionButton,
 } from '../../components'
 import { useHistory } from 'react-router-dom'
 import { ROUTES } from '../../constants'
@@ -113,9 +113,9 @@ const DeleteButton = ({ onClick }) => {
     history.push(ROUTES.TEAMS.LIST)
   }
   return (
-    <DangerActionButton onClick={deleteTeam}>
+    <WarningActionButton onClick={deleteTeam}>
       Eliminar Equipo
-    </DangerActionButton>
+    </WarningActionButton>
   )
 }
 

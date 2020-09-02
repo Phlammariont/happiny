@@ -4,13 +4,13 @@ import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { ROUTES } from '../../constants'
 import {
-  ViewContainer,
-  TitleContainer,
-  MainContainer,
-  MainActionButton,
   ActionsContainer,
   ListFab,
+  MainActionButton,
+  MainContainer,
   NothingHere,
+  TitleContainer,
+  ViewContainerTop,
 } from '../../components'
 
 const ListTeams = ({ teams = [] }) => {
@@ -21,7 +21,7 @@ const ListTeams = ({ teams = [] }) => {
   }
 
   return (
-    <ViewContainer top>
+    <ViewContainerTop>
       <TitleContainer>
         <h1>Equipos</h1>
         <p>Estos son los equipos que has configurado</p>
@@ -31,7 +31,7 @@ const ListTeams = ({ teams = [] }) => {
         {isEmpty(teams) ? <NothingHere /> : <NewTeamFAB />}
       </MainContainer>
       {isEmpty(teams) ? <ActionsContainer><AddTeamButton onClick={navigateToNewTeam}/></ActionsContainer> : null}
-    </ViewContainer>
+    </ViewContainerTop>
   )
 }
 
