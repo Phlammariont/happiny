@@ -7,4 +7,9 @@ const ViewContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `
+
+export const ViewContainerTop = styled(ViewContainer)`
+  justify-content: flex-start; 
+`
+
 export default ViewContainer

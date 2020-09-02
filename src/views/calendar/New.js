@@ -39,7 +39,7 @@ const AddServiceButton = ({ ready }) => {
 
 const NewCalendarView = ({ teams = [], services = [] }) => {
   const [ready, setReady] = useState(false)
-  const [shouldAddTeam, setShouldAddTeam] = useState(!isEmpty(teams))
+  const [shouldAddTeam] = useState(!isEmpty(teams))
   const [shouldAddService, setShouldAddService] = useState(!isEmpty(services))
 
   const validateNewCalendarModel = ({ name, dayNurses, nightNurses, auxByNurse }) => {

@@ -1,8 +1,8 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-export const EXPLORE = "Explora"
-export const CALENDAR = "Calendario"
+export const EXPLORE = 'Principal'
+export const CALENDAR = 'Calendario'
 
 const BottomBarContainer = styled.div`
   position: fixed;
@@ -18,13 +18,13 @@ const BottomTabs = styled.div`
   justify-content: space-evenly;
   margin: 1rem;
   padding: 1rem;
-  box-shadow: 3px 3px 2px 0px rgba(0,0,0,0.5);
+  box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 0.5);
 `
 
 const BottomBar = ({ user, isLoading }) => {
   return (
     <BottomBarContainer>
-      <LoadingBar isLoading={isLoading}/>
+      <LoadingBar isLoading={isLoading} />
       <BottomTabs>
         <Explore />
         <Calendar />
@@ -34,12 +34,12 @@ const BottomBar = ({ user, isLoading }) => {
   )
 }
 
-const LoadingBar = ({isLoading}) => {
+const LoadingBar = ({ isLoading }) => {
   return isLoading ? <div>...loading...</div> : null
 }
 
 const Explore = () => {
-  return <BottomBarTab>{EXPLORE}</BottomBarTab>
+  return <BottomBarTab to="/dashboard">{EXPLORE}</BottomBarTab>
 }
 
 const Calendar = () => {
@@ -47,7 +47,7 @@ const Calendar = () => {
 }
 
 const Profile = ({ user }) => {
-  return <BottomBarTab to='/profile'>{user.name || 'Perfil'}</BottomBarTab>
+  return <BottomBarTab to="/profile">{user.name || 'Perfil'}</BottomBarTab>
 }
 
 const BottomBarLink = styled(Link)`
