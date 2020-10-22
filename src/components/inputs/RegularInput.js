@@ -1,19 +1,15 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { COLORS } from '../style'
+import { FormControlContainer } from '../layout/FormControlContainer'
 
-const Label = styled.label`
+export const Label = styled.label`
   color: gray;
   
   &.active {
     color: #5fb8cf;
   }
 `
-
-const COLORS = {
-  INACTIVE: 'gray',
-  ACTIVE: '#5fb8cf',
-  ERROR: 'red',
-}
 
 const StyledInput = styled.input`
   width: 100%;
@@ -37,16 +33,12 @@ const ErrorSpan = styled.span`
   color: red;
 `
 
-const InputContainer = styled.div`
-  margin: 5px;
-`
-
 const Input = ({ error, errorMessage, label, type, ...rest }) => {
   const [focus, setFocus] = useState(false)
 
   return (
-    <InputContainer>
-      <Label className={focus?'active':''} htmlFor={`txt-${label}`}>{label}</Label>
+    <FormControlContainer>
+      <Label className={focus ? 'active' : ''} htmlFor={`txt-${label}`}>{label}</Label>
       <StyledInput
         id={`txt-${label}`} type={type}
         onFocus={() => setFocus(true)}
@@ -55,7 +47,7 @@ const Input = ({ error, errorMessage, label, type, ...rest }) => {
         {...rest}
       />
       { error && errorMessage && <ErrorContainer><ErrorSpan>{errorMessage}</ErrorSpan></ErrorContainer>}
-    </InputContainer>
+    </FormControlContainer>
   )
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
-import { ViewContainer, ActionsContainer, Fab } from '../../components'
+import { ActionsContainer, Fab, ViewContainer } from '../../components'
 import { ReactComponent as Calendar } from '../../components/icons/calendar.svg'
 import { ReactComponent as Team } from '../../components/icons/team.svg'
 import { ReactComponent as Services } from '../../components/icons/cardiovascular.svg'
@@ -12,27 +12,24 @@ const DashboardCardsContent = (props) => {
 }
 
 const PlannersContainer = styled.div`
-  background-color: #084b83;
   width: 100%;
   height: 25vh;
-  color: white;
   text-align: center;
+  border-bottom: 1px solid gray;
 `
 
 const TeamsContainer = styled.div`
-  background-color: #ff66b3;
   width: 100%;
   height: 25vh;
-  color: white;
   text-align: center;
+  border-bottom: 1px solid gray;
 `
 
 const ServicesContainer = styled.div`
-  background-color: #bbe6e4;
   width: 100%;
   height: 25vh;
-  color: black;
   text-align: center;
+  border-bottom: 1px solid gray;
 `
 
 const CalendarIcon = styled(Calendar)`
@@ -104,12 +101,30 @@ const NewModelButton = () => {
   const toggleOpen = () => setIsOpen(!isOpen)
   return (
     <NewModelButtonsContainer>
-      {isOpen && <>
-        <Fab weight={2} label={'Planeador'}>+</Fab>
-        <Fab weight={2} label={'Equipo'} onClick={() => history.push(ROUTES.TEAMS.NEW)  }>+</Fab>
-        <Fab weight={2} label={'Servicio'}>+</Fab></>
-      }
-      <Fab onClick={toggleOpen} weight={3}>+</Fab>
+      {isOpen && (
+        <>
+          <Fab
+            weight={2}
+            label={'Planeador'}
+            onClick={() => history.push(ROUTES.PLANNER.NEW)}
+          >
+            +
+          </Fab>
+          <Fab
+            weight={2}
+            label={'Equipo'}
+            onClick={() => history.push(ROUTES.TEAMS.NEW)}
+          >
+            +
+          </Fab>
+          <Fab weight={2} label={'Servicio'}>
+            +
+          </Fab>
+        </>
+      )}
+      <Fab onClick={toggleOpen} weight={3}>
+        +
+      </Fab>
     </NewModelButtonsContainer>
   )
 }
@@ -128,8 +143,23 @@ const Dashboard = ({ teams = [], services = [], planners = [] }) => {
         </ActionsContainer>
       </ViewContainer>
       <div>
-        Icons made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-        Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+        Icons made by{' '}
+        <a href="http://www.freepik.com/" title="Freepik">
+          Freepik
+        </a>{' '}
+        from{' '}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+        Icons made by{' '}
+        <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
+          Freepik
+        </a>{' '}
+        from{' '}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          {' '}
+          www.flaticon.com
+        </a>
       </div>
     </>
   )

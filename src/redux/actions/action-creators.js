@@ -1,9 +1,12 @@
-import { USER_ACTIONS, APP_ACTIONS, TEAM_ACTIONS } from './action-types'
+import { APP_ACTIONS, TEAM_ACTIONS, USER_ACTIONS } from './action-types'
 
 export const UserActionCreator = {
   load: (user) => ({
     type: USER_ACTIONS.load,
     user,
+  }),
+  unLoad: () => ({
+    type: USER_ACTIONS.unLoad,
   })
 }
 

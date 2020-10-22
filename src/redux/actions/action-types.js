@@ -1,5 +1,6 @@
 export const USER_ACTIONS = {
-  load: 'LOAD_USER'
+  load: 'LOAD_USER',
+  unLoad: 'UN_LOAD_USER',
 }
 
 export const TEAM_ACTIONS = {
