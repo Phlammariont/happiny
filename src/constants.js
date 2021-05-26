@@ -15,5 +15,8 @@ export const ROUTES = {
   SERVICE: {
     NEW: '/service/new',
     LIST: '/service/list'
+  },
+  CALENDAR: {
+    MAIN: '/calendar'
   }
 }
