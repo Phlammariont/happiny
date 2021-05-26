@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {
   ActionsContainer,
+  BackButton,
   Input,
   ListInput,
   MainActionButton,
@@ -8,12 +9,12 @@ import {
   TitleContainer,
   ViewContainer,
   WarningActionButton,
-} from '../../components'
+} from 'components'
 import { useHistory } from 'react-router-dom'
 import { ROUTES } from '../../constants'
 import teamService from '../../service/team'
 import { useDispatch } from 'react-redux'
-import { TeamActionCreator } from '../../redux/actions'
+import { TeamActionCreator } from '../../redux'
 import { isNil } from 'ramda'
 
 const nameHasError = (errors) => errors.name
@@ -77,6 +78,7 @@ const NewTeam = ({ team }) => {
       <ActionsContainer>
         <SaveButton onClick={save}/>
         { team?.id && <DeleteButton onClick={deleteTeam} /> }
+        <BackButton />
       </ActionsContainer>
     </ViewContainer>
   )

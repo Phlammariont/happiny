@@ -1,5 +1,18 @@
-import React from 'react'
+import styled from 'styled-components'
+import { Button } from 'antd'
 
-const Button = (props) => <button {...props}/>
+const Base = styled(Button)`
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  height: 3rem;
+  font-size: 1.5rem;
+  
+  &:hover, &:focus {
+    color: black;
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+`
 
-export default Button
+export default Base

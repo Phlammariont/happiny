@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+
 export const EXPLORE = 'Principal'
 export const CALENDAR = 'Calendario'
 
@@ -18,7 +19,7 @@ const BottomTabs = styled.div`
   justify-content: space-evenly;
   margin: 1rem;
   padding: 1rem;
-  box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 3px 3px 2px 0 rgba(0, 0, 0, 0.5);
 `
 
 const BottomBar = ({ user, isLoading }) => {
@@ -43,7 +44,7 @@ const Explore = () => {
 }
 
 const Calendar = () => {
-  return <BottomBarTab>{CALENDAR}</BottomBarTab>
+  return <BottomBarTab to="/calendar">{CALENDAR}</BottomBarTab>
 }
 
 const Profile = ({ user }) => {

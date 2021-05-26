@@ -1,20 +1,24 @@
 import { auth } from './firebase'
-import appStore, { UserActionCreator, AppActionCreator } from '../redux'
-import { applySpec, path } from 'ramda'
+import appStore, { AppActionCreator, UserActionCreator } from '../redux'
 
-const getUserName = path(['user', 'displayName'])
-const getUser = applySpec({
-  name: getUserName,
-})
+auth.onAuthStateChanged(function(user) {
+  if (user) {
+    appStore.dispatch(UserActionCreator.load(user))
+  } else {
+    appStore.dispatch(UserActionCreator.unLoad(user))
+  }
+});
 
 export const createUser = async ({ email, password }) => {
   return await auth.createUserWithEmailAndPassword(email, password)
 }
 
+
 export const authenticateUser = async ({ email, password }) => {
   await appStore.dispatch(AppActionCreator.setLoading())
-  const result = await auth.signInWithEmailAndPassword(email, password)
-  appStore.dispatch(UserActionCreator.load(getUser(result)))
+  await auth.signInWithEmailAndPassword(email, password)
   appStore.dispatch(AppActionCreator.setLoading(false))
   return true
 }
+
+export const signOut = () => auth.signOut()

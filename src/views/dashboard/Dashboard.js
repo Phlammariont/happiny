@@ -1,67 +1,29 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
-import { ViewContainer, ActionsContainer, Fab } from '../../components'
-import { ReactComponent as Calendar } from '../../components/icons/calendar.svg'
-import { ReactComponent as Team } from '../../components/icons/team.svg'
-import { ReactComponent as Services } from '../../components/icons/cardiovascular.svg'
+import { ActionsContainer, Fab, ViewContainer } from '../../components'
 import { ROUTES } from '../../constants'
+import { PlusOutlined } from '@ant-design/icons'
+import {
+  CalendarIcon,
+  NewModelButtonsContainer,
+  PlannersContainer,
+  ServicesContainer,
+  ServicesIcon,
+  TeamIcon,
+  TeamsContainer,
+} from './style'
 
 const DashboardCardsContent = (props) => {
   return <div>{props.children}</div>
 }
 
-const PlannersContainer = styled.div`
-  background-color: #084b83;
-  width: 100%;
-  height: 25vh;
-  color: white;
-  text-align: center;
-`
-
-const TeamsContainer = styled.div`
-  background-color: #ff66b3;
-  width: 100%;
-  height: 25vh;
-  color: white;
-  text-align: center;
-`
-
-const ServicesContainer = styled.div`
-  background-color: #bbe6e4;
-  width: 100%;
-  height: 25vh;
-  color: black;
-  text-align: center;
-`
-
-const CalendarIcon = styled(Calendar)`
-  width: 30%;
-  margin: 5%;
-  height: auto;
-`
-
-const TeamIcon = styled(Team)`
-  width: 30%;
-  margin: 5%;
-  height: auto;
-`
-
-const ServicesIcon = styled(Services)`
-  width: 30%;
-  margin: 5%;
-  height: auto;
-`
-
-const NewModelButtonsContainer = styled.div`
-  margin: 1rem;
-  align-self: flex-end;
-  display: flex;
-`
-
-const DashboardPlannerCard = ({ planners }) => {
+const PlannerCard = ({ planners }) => {
+  const history = useHistory()
+  const navigateToPlanners = () => {
+    history.push(ROUTES.PLANNER.LIST)
+  }
   return (
-    <PlannersContainer>
+    <PlannersContainer onClick={navigateToPlanners}>
       <CalendarIcon />
       <br />
       <span>
@@ -86,8 +48,12 @@ const TeamsCard = ({ teams }) => {
 }
 
 const ServicesCard = ({ services }) => {
+  const history = useHistory()
+  const navigateToServices = () => {
+    history.push(ROUTES.SERVICE.LIST)
+  }
   return (
-    <ServicesContainer>
+    <ServicesContainer onClick={navigateToServices}>
       <ServicesIcon />
       <br />
       <span>
@@ -100,16 +66,18 @@ const ServicesCard = ({ services }) => {
 const NewModelButton = () => {
   const [isOpen, setIsOpen] = useState(false)
   const history = useHistory()
-
   const toggleOpen = () => setIsOpen(!isOpen)
+
   return (
     <NewModelButtonsContainer>
-      {isOpen && <>
-        <Fab weight={2} label={'Planeador'}>+</Fab>
-        <Fab weight={2} label={'Equipo'} onClick={() => history.push(ROUTES.TEAMS.NEW)  }>+</Fab>
-        <Fab weight={2} label={'Servicio'}>+</Fab></>
-      }
-      <Fab onClick={toggleOpen} weight={3}>+</Fab>
+      {isOpen && (
+        <>
+          <Fab weight={3} label={'Planeador'} onClick={() => history.push(ROUTES.PLANNER.NEW)} icon={<PlusOutlined />} />
+          <Fab weight={3} label={'Equipo'} onClick={() => history.push(ROUTES.TEAMS.NEW)} icon={<PlusOutlined />} />
+          <Fab weight={3} label={'Servicio'} icon={<PlusOutlined />} onClick={() => history.push(ROUTES.SERVICE.NEW)} />
+        </>
+      )}
+      <Fab onClick={toggleOpen} weight={4} icon={<PlusOutlined />} />
     </NewModelButtonsContainer>
   )
 }
@@ -119,7 +87,7 @@ const Dashboard = ({ teams = [], services = [], planners = [] }) => {
     <>
       <ViewContainer>
         <DashboardCardsContent>
-          <DashboardPlannerCard planners={planners} />
+          <PlannerCard planners={planners} />
           <ServicesCard services={services} />
           <TeamsCard teams={teams} />
         </DashboardCardsContent>
@@ -128,8 +96,23 @@ const Dashboard = ({ teams = [], services = [], planners = [] }) => {
         </ActionsContainer>
       </ViewContainer>
       <div>
-        Icons made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-        Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+        Icons made by{' '}
+        <a href="http://www.freepik.com/" title="Freepik">
+          Freepik
+        </a>{' '}
+        from{' '}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+        Icons made by{' '}
+        <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
+          Freepik
+        </a>{' '}
+        from{' '}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          {' '}
+          www.flaticon.com
+        </a>
       </div>
     </>
   )
