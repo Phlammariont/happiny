@@ -2,6 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import {
+  Calendar,
   Dashboard,
   Home,
   ListPlanner,
@@ -66,6 +67,9 @@ const AppRouter = () => {
         </Route>
         <Route path={ROUTES.SERVICE.LIST}>
           <ListService />
+        </Route>
+        <Route path={ROUTES.CALENDAR.MAIN}>
+          <Calendar />
         </Route>
       </Switch>
       <DevBar />

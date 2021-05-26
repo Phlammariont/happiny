@@ -48,7 +48,7 @@ const Calendar = () => {
 }
 
 const Profile = ({ user }) => {
-  return <BottomBarTab to="/profile">{user.name || 'Perfil'}</BottomBarTab>
+  return <BottomBarTab to="/profile">{'Perfil'}</BottomBarTab>
 }
 
 const BottomBarLink = styled(Link)`
