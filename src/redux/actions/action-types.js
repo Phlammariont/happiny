@@ -4,10 +4,24 @@ export const USER_ACTIONS = {
 }
 
 export const TEAM_ACTIONS = {
-  fetchAll: 'FETCH_TEAM_COLLECTION',
-  setCollection: 'SET_TEAM_COLLECTION',
-  addItem: 'ADD_ITEM_TO_COLLECTION',
-  removeItem: 'REMOVE_ITEM_FROM_COLLECTION',
+  fetchAll: 'TEAM_FETCH_COLLECTION',
+  setCollection: 'TEAM_SET_COLLECTION',
+  addItem: 'TEAM_ADD_ITEM_TO_COLLECTION',
+  removeItem: 'TEAM_REMOVE_ITEM_FROM_COLLECTION',
+}
+
+export const SERVICE_ACTIONS = {
+  fetchAll: 'SERVICE_FETCH_COLLECTION',
+  setCollection: 'SERVICE_SET_COLLECTION',
+  addItem: 'SERVICE_ADD_ITEM_TO_COLLECTION',
+  removeItem: 'SERVICE_REMOVE_ITEM_FROM_COLLECTION',
+}
+
+export const PLANNER_ACTIONS = {
+  fetchAll: 'PLANNER_FETCH_COLLECTION',
+  setCollection: 'PLANNER_SET_COLLECTION',
+  addItem: 'PLANNER_ADD_ITEM_TO_COLLECTION',
+  removeItem: 'PLANNER_REMOVE_ITEM_FROM_COLLECTION',
 }
 
 export const APP_ACTIONS = {

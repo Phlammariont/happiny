@@ -2,13 +2,12 @@ import React from 'react'
 import List from './List'
 import { useSelector } from 'react-redux'
 import { withBottomBar } from '../enhancers'
-import { getTeamsCollection } from '../../redux/selectors'
-
+import { getServiceCollection } from '../../redux/selectors/service'
 
 const ListContainer = () => {
-  const teams = useSelector(getTeamsCollection)
+  const services = useSelector(getServiceCollection)
 
-  return <List teams={teams}/>
+  return <List services={services}/>
 }
 
 export default withBottomBar(ListContainer)

@@ -12,6 +12,7 @@ import {
   TitleContainer,
   ViewContainerTop,
 } from '../../components'
+import { PlusOutlined } from '@ant-design/icons'
 
 const ListTeams = ({ teams = [] }) => {
   const history = useHistory()
@@ -36,7 +37,11 @@ const ListTeams = ({ teams = [] }) => {
 }
 
 const NewTeamFAB = () => {
-  return <Link to={ROUTES.TEAMS.NEW}><ListFab>+</ListFab></Link>
+  return (
+    <Link to={ROUTES.TEAMS.NEW}>
+      <ListFab weight={3} icon={<PlusOutlined />} />
+    </Link>
+  )
 }
 
 const TeamCard = (history) => (team) => {

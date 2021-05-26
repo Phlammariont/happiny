@@ -1,7 +1,19 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Dashboard, Home, ListTeams, NewPlanner, NewTeam, Profile, SignIn, SignUp } from './views'
+import {
+  Dashboard,
+  Home,
+  ListPlanner,
+  ListService,
+  ListTeams,
+  NewPlanner,
+  NewService,
+  NewTeam,
+  Profile,
+  SignIn,
+  SignUp,
+} from './views'
 import appStore from './redux'
 import './App.css'
 import { ROUTES } from './constants'
@@ -28,7 +40,7 @@ const AppRouter = () => {
         <Route path="/sign-up">
           <SignUp />
         </Route>
-        <Route path="/dashboard">
+        <Route path={ROUTES.APP.DASHBOARD}>
           <Dashboard />
         </Route>
         <Route path="/profile">
@@ -45,6 +57,15 @@ const AppRouter = () => {
         </Route>
         <Route path={ROUTES.PLANNER.NEW}>
           <NewPlanner />
+        </Route>
+        <Route path={ROUTES.PLANNER.LIST}>
+          <ListPlanner />
+        </Route>
+        <Route path={ROUTES.SERVICE.NEW}>
+          <NewService />
+        </Route>
+        <Route path={ROUTES.SERVICE.LIST}>
+          <ListService />
         </Route>
       </Switch>
       <DevBar />

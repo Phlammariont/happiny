@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { isEmpty, map } from 'ramda'
+import { ROUTES } from '../../constants'
 import {
   ActionsContainer,
+  BackButton,
   DateInput,
   Input,
   MainActionButton,
@@ -9,16 +13,14 @@ import {
   Select,
   TitleContainer,
   ViewContainer,
-} from '../../components'
-import { Link } from 'react-router-dom'
-import { isEmpty, map } from 'ramda'
-import { ROUTES } from '../../constants'
+} from 'components'
+import plannerService from '../../service/planner'
 
-const toOption = ({ id, name }) => ({ id, label: name })
+const toOption = ({ id, name }) => ({ id, name, label: name })
 
-const CreateNewCalendarButton = ({ ready }) => {
+const CreateNewCalendarButton = ({ ready, ...rest }) => {
   const ButtonComponent = ready ? MainActionButton : SecondActionButton
-  return <ButtonComponent>Empezar Calendario</ButtonComponent>
+  return <ButtonComponent {...rest}>Empezar Calendario</ButtonComponent>
 }
 
 const AddTeamButton = () => {
@@ -39,25 +41,24 @@ const AddServiceButton = () => {
 
 const NewCalendarView = ({ teams = [], services = [] }) => {
   const [ready, setReady] = useState(false)
+  const [planner, setPlanner] = useState()
 
   const onChangeForm = (model) => {
     setReady(false)
-    if (
-      model.team &&
-      model.service &&
-      model.name &&
-      model.startDate &&
-      model.endDate
-    )
+    if (plannerService.isValid(model)) {
+      setPlanner(model)
       setReady(true)
+    }
   }
+
+  const save = () => plannerService.save(planner)
 
   return (
     <ViewContainer>
       <TitleContainer>
         <h1>Agrega un Planeador</h1>
         <p>
-          Planeadores son generados con base en la difinicion de los servicios y
+          Planeadores son generados con base en la definición de los servicios y
           deben integrar un equipo para que sus integrantes sean asignados.
         </p>
       </TitleContainer>
@@ -67,9 +68,10 @@ const NewCalendarView = ({ teams = [], services = [] }) => {
         onChange={onChangeForm}
       />
       <ActionsContainer>
-        {ready && <CreateNewCalendarButton ready={ready} />}
+        {ready && <CreateNewCalendarButton ready={ready} onClick={save}/>}
         {isEmpty(teams) && <AddTeamButton />}
         {isEmpty(services) && <AddServiceButton />}
+        <BackButton />
       </ActionsContainer>
     </ViewContainer>
   )

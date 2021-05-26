@@ -1,8 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MainActionButton, SecondActionButton, ViewContainer, ActionsContainer, LogoContainer } from '../../components'
+import { ActionsContainer, LogoContainer, MainActionButton, SecondActionButton, ViewContainer } from '../../components'
 import logo from '../../images/nurse-transparente.png'
-import {Link} from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import { getUser } from '../../redux/selectors'
+import { ROUTES } from '../../constants'
+import { useDispatch, useSelector } from 'react-redux'
+import { isEmpty } from 'ramda'
+import { AppActionCreator } from '../../redux'
 
 const HomeContainer = styled(ViewContainer)`
   color: white;
@@ -38,6 +43,15 @@ const SignUpButton = () => {
 }
 
 const HomeView = () => {
+  const history = useHistory()
+  const user = useSelector(getUser)
+  const dispatch = useDispatch()
+  if(!isEmpty(user)) {
+    history.push(ROUTES.APP.DASHBOARD)
+    dispatch(AppActionCreator.setLoading())
+    return null
+  }
+
   return (
     <HomeContainer>
       <LogoContainer >

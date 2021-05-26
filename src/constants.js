@@ -1,6 +1,7 @@
 export const ROUTES = {
   APP: {
-    SIGN_IN: '/sign-in'
+    SIGN_IN: '/sign-in',
+    DASHBOARD: '/dashboard'
   },
   TEAMS: {
     NEW: '/teams/new',
@@ -9,8 +10,10 @@ export const ROUTES = {
   },
   PLANNER: {
     NEW: '/planner/new',
+    LIST: '/planner/list',
   },
   SERVICE: {
     NEW: '/service/new',
+    LIST: '/service/list'
   }
 }

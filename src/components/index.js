@@ -3,6 +3,7 @@ export {
   MainAction as MainActionButton,
   SecondAction as SecondActionButton,
   WarningAction as WarningActionButton,
+  BackButton,
   Fab,
   ListFab
 } from './buttons'
