@@ -1,3 +1,3 @@
-import { prop } from 'ramda'
+import { path } from 'ramda'
 
-export const getUser = prop('user')
+export const getUser = path(['user', 'user'])

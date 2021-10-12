@@ -1,5 +1,5 @@
 import React from 'react'
 
-export const Calendar = () => {
+export const Main = () => {
   return <div>si buenas</div>
 }

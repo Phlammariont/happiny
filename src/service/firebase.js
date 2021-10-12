@@ -1,6 +1,5 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
+import { initializeApp } from 'firebase/app'
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyA5DCG7mVl_l0qMukK3vZV2bhFwfJySNxQ",
@@ -13,16 +12,14 @@ const firebaseConfig = {
   measurementId: "G-J0JPTPMD0P"
 };
 
-const instance = firebase.initializeApp(firebaseConfig);
+const instance = initializeApp(firebaseConfig);
 
-export const auth = instance.auth()
+const db = getFirestore(instance)
 
-const db = firebase.firestore()
+export const addItem = (collectionName, item) => addDoc(collection(db, collectionName), item)
 
-export const addItem = (collection, item) => db.collection(collection).add(item)
+export const updateItem = ({collectionName,  id, update }) => setDoc(doc(db, collectionName, id), update)
 
-export const updateItem = ({ collection, id, update }) => db.collection(collection).doc(id).set(update)
+export const fetchCollection = (collectionName) => getDocs(collection(db, collectionName))
 
-export const fetchCollection = (collection) => db.collection(collection).get()
-
-export const removeItem = (collection, itemId) => db.collection(collection).doc(itemId).delete()
+export const removeItem = (collectionName, itemId) => deleteDoc(doc(db, collectionName, itemId))
