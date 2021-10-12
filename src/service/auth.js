@@ -1,7 +1,7 @@
-import { auth } from './firebase'
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 import appStore, { AppActionCreator, UserActionCreator } from '../redux'
 
-auth.onAuthStateChanged(function(user) {
+onAuthStateChanged(getAuth(), user => {
   if (user) {
     appStore.dispatch(UserActionCreator.load(user))
   } else {
@@ -10,15 +10,17 @@ auth.onAuthStateChanged(function(user) {
 });
 
 export const createUser = async ({ email, password }) => {
-  return await auth.createUserWithEmailAndPassword(email, password)
+  const auth = getAuth();
+  return await createUserWithEmailAndPassword(auth, email, password)
 }
 
 
 export const authenticateUser = async ({ email, password }) => {
+  const auth = getAuth();
   await appStore.dispatch(AppActionCreator.setLoading())
-  await auth.signInWithEmailAndPassword(email, password)
+  await signInWithEmailAndPassword(auth, email, password)
   appStore.dispatch(AppActionCreator.setLoading(false))
   return true
 }
 
-export const signOut = () => auth.signOut()
+export const signOut = () => getAuth().signOut()

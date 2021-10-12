@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
-import { UserActionCreator } from '../redux/actions'
+import { UserActionCreator } from '../redux'
 import { useHistory } from 'react-router-dom'
 import { isEmpty } from 'ramda'
 
@@ -17,6 +17,8 @@ const DevBarContainner = styled.div`
 const isDevEnv = () => process.env.NODE_ENV !== 'production'
 const getAutoNavigate = () => process.env.REACT_APP_AUTO_NAVIGATE
 const isEnabledAutolLogin = () => process.env.REACT_APP_AUTO_LOG_IN === 'true'
+const isDevToolsEnabled = () => process.env.REACT_APP_DEV_TOOLS_ENABLED === 'true'
+
 export const DevBar = () => {
   const dispatch = useDispatch()
   const [isOpen, setOpen] = useState(false)
@@ -33,10 +35,11 @@ export const DevBar = () => {
     if ( evt.key === 'd' && evt.ctrlKey ) setOpen(!isOpen)
   }
   if (!isDevEnv()) return null
+  if (!isDevToolsEnabled()) return null
 
   document.addEventListener("keydown", handleCommand);
   if (!isOpen) return (
-    <DevBarContainner onClick={() => setOpen(!isOpen)}>></DevBarContainner>
+    <DevBarContainner onClick={() => setOpen(!isOpen)}>{'>'}</DevBarContainner>
   )
 
   return (

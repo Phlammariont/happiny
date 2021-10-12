@@ -6,8 +6,8 @@ import { Link, useHistory } from 'react-router-dom'
 import { getUser } from '../../redux/selectors'
 import { ROUTES } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux'
-import { isEmpty } from 'ramda'
 import { AppActionCreator } from '../../redux'
+import { isValid } from 'models/user'
 
 const HomeContainer = styled(ViewContainer)`
   color: white;
@@ -46,7 +46,7 @@ const HomeView = () => {
   const history = useHistory()
   const user = useSelector(getUser)
   const dispatch = useDispatch()
-  if(!isEmpty(user)) {
+  if(isValid(user)) {
     history.push(ROUTES.APP.DASHBOARD)
     dispatch(AppActionCreator.setLoading())
     return null

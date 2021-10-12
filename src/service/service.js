@@ -45,9 +45,11 @@ const fetchAll = () =>
       .catch((error) => subscriber.error(error))
   })
 
-export default {
+const serviceService = {
   save,
   fetchAll,
   remove,
   update,
 }
+
+export default serviceService

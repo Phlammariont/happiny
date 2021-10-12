@@ -13,7 +13,9 @@ const BottomBarContainer = styled.div`
 `
 
 const BottomTabs = styled.div`
-  background-color: #5fb8cf1f;
+  background-color: #5fb8cfbf;
+  color: white;
+  font-weight: bold;
   border-radius: 2rem;
   display: flex;
   justify-content: space-evenly;
@@ -48,7 +50,7 @@ const Calendar = () => {
 }
 
 const Profile = ({ user }) => {
-  return <BottomBarTab to="/profile">{user.name || 'Perfil'}</BottomBarTab>
+  return <BottomBarTab to="/profile">{ 'Perfil' } { user && user.name }</BottomBarTab>
 }
 
 const BottomBarLink = styled(Link)`

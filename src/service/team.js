@@ -43,9 +43,11 @@ const fetchAll = () =>
       .catch((error) => subscriber.error(error))
   })
 
-export default {
+const teamService = {
   save,
   fetchAll,
   remove,
   update,
 }
+
+export default teamService

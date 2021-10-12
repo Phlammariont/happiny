@@ -48,10 +48,12 @@ const fetchAll = () =>
       .catch((error) => subscriber.error(error))
   })
 
-export default {
+const plannerService = {
   save,
   fetchAll,
   remove,
   update,
   isValid,
 }
+
+export default plannerService
